@@ -1,0 +1,41 @@
+{% extends "ventas/base.html" %}
+{% block title %}Ecommerce Home Page{% endblock  %}
+{% load bootstrap4 %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+          <img class="img-fluid" src="/media/{{ product.imagen }}" alt="">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">{{ product.nombre }}</h3>
+          <p>{{ product.descripcion }}</p>
+          <h3 class="my-3">Project Details</h3>
+          <ul>
+            <li>Lorem Ipsum</li>
+            <li>Dolor Sit Amet</li>
+            <li>Consectetur</li>
+            <li>Adipiscing Elit</li>
+          </ul>
+            <form action="">
+                <input type="submit" class="btn btn-danger" value="Add to cart">
+            </form>
+        </div>
+</div>
+        <hr>
+        <div class="row">
+        {% for item in product.review_set.all %}
+            <div class="card mb-3 w-100">
+          <div class="card-body">
+            <h5 class="card-title"> star</h5>
+            <p class="card-text"></p>
+            <p class="card-text">By : </p>
+          </div>
+          <div class="card-footer text-muted">
+             ago
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+    
+{% endblock %}
