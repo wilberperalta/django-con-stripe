@@ -31,17 +31,14 @@ class Productos(models.Model):
     def __str__(self):
         return self.nombre
     class Meta:
-        verbose_name_plural='Productos'    
+        verbose_name_plural='Productos' 
 
 class Carrusel(models.Model):
     nombre = models.CharField(max_length=250)
-    nombreclass = models.CharField(max_length=250,null=True)
-    imagen = models.ImageField(upload_to='carrusel',blank=True) 
-    creado = models.DateTimeField(auto_now_add=True)
+    nombreclass = models.CharField(max_length=250, null=True)
+    imagen = models.ImageField(upload_to='carrusel',blank=True)
     def __str__(self):
         return self.nombre
     class Meta:
-        verbose_name_plural='Carrusel'            
-        
-        
+        verbose_name_plural='Carrusel' 
 # Create your models here.

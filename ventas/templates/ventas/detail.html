@@ -5,11 +5,12 @@
     <div class="row">
         <div class="col-md-8">
           <img class="img-fluid" src="/media/{{ product.imagen }}" alt="">
+          <h3 class="my-3">{{ product.nombre }}</h3>
+          <p>{{ product.descripcion }}</p>
         </div>
 
         <div class="col-md-4">
-          <h3 class="my-3">{{ product.nombre }}</h3>
-          <p>{{ product.descripcion }}</p>
+          
           <h3 class="my-3">Project Details</h3>
           <ul>
             <li>Lorem Ipsum</li>
@@ -17,9 +18,13 @@
             <li>Consectetur</li>
             <li>Adipiscing Elit</li>
           </ul>
-            <form action="">
-                <input type="submit" class="btn btn-danger" value="Add to cart">
-            </form>
+          <div class="card-footer">
+              <small class="text-muted"><a class="btn btn-success" href="{% url 'ventas:test' %}">Pagar</a></small>
+            </div>
+          
+            <!-- <form action="">
+               <input type="submit" class="btn btn-danger" value="Add to cart"></a> 
+            </form> -->
         </div>
 </div>
         <hr>
@@ -27,15 +32,15 @@
         {% for item in product.review_set.all %}
             <div class="card mb-3 w-100">
           <div class="card-body">
-            <h5 class="card-title"> star</h5>
+            <h5 class="card-title"></h5>
             <p class="card-text"></p>
-            <p class="card-text">By : </p>
+            <p class="card-text">By:</p>
           </div>
           <div class="card-footer text-muted">
-             ago
+            ago
           </div>
         </div>
         {% endfor %}
         </div>
-    
+ 
 {% endblock %}

@@ -20,6 +20,57 @@
   </head>
 
   <body>
+    <!-- Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">🛒 Carrito de Compras</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Producto</th>
+                <th width="140">Cantidad</th>
+                <th></th>
+              </thead>
+              <tbody>
+                {% for item in carrito %}
+                <tr>
+                  <td><img height="80" src="https://home.ripley.cl/store/Attachment/WOP/D317/2000375234800/2000375234800-1.jpg" /></td>
+                  <td>
+                    <div>{{item.nombre}}</div>
+                    <div>Precio Unidad</div>
+                    <div>S/ {{item.precio}}</div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-secondary">-</button>
+                      </div>
+                      <input type="text" class="form-control" value="{{item.cant}}">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary">+</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-danger">x</button></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <span class="mr-4"><strong>Total:</strong> S/ 75.00</span>
+            <a href="#" class="btn btn-primary">Pagar</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -56,12 +107,12 @@
                     </div>
                 </li>
           </ul>
-
-            <form class="form-inline my-2 my-lg-0 mr-4" action="{% url "ventas:search" %}">
+          
+            <form class="form-inline my-2 my-lg-0 mr-4" action=" {% url 'ventas:search' %} ">
                 <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <a href="" class="btn btn-success">🛒{{ request.session.data.count }} Item{{ request.session.data.count|pluralize }}</a>
+            <button type="button" data-toggle="modal" data-target="#cartModal" class="btn btn-success">🛒{{ request.session.carrito|length }} Item{{ request.session.carrito|pluralize }}</button>
         </div>
       </div>
     </nav>
@@ -76,7 +127,8 @@
           <h1 class="my-4">codiGo ecommerce</h1>
           <div class="list-group">
               {% for c in categorias %}
-                  <a href="{% url "ventas:categorias" c.slug %}" class="list-group-item">{{ c.nombre }}</a>
+                  <a href="{% url 'ventas:categorias' c.slug %}" class="list-group-item">{{ c.nombre }}</a>
+                
               {% endfor %}
 
           </div>
@@ -85,7 +137,9 @@
 
         <div class="col-lg-9 mt-3">
         {% bootstrap_messages %}
-{% block header %}{% endblock %}
+{% block header %}
+      
+{% endblock %}
 
 
               {% block content %}
@@ -215,3 +269,4 @@
   </body>
 
 </html>
+

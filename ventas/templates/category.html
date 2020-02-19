@@ -1,0 +1,35 @@
+{% extends "ventas/base.html" %}
+{% block title %}CodiGo eCommerce Pagina Principal{% endblock  %}
+
+{% block content %}
+    <div class="row">
+{% for item in productos %}
+    <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="/media/{{ item.imagen }}" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="{% url 'ventas:detail' item.slug %}">{{ item.nombre }}</a>
+                    <a href="{% url 'ventas:detail' item.slug %}">{{ item.nombre }}</a>
+                  </h4>
+                  <h5>S/. {{ item.precio|floatformat:"2" }}</h5>
+                  <p class="card-text">{{ item.marca }}</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted"><a class="btn btn-success" href="">Adicionar al Carrito</a></small>
+                </div>
+              </div>
+            </div>
+{% endfor %}
+</div>
+
+
+
+{% endblock %}
+
+
+{% block header %}
+          
+                  <a href="{% url 'ventas:categorias' c.slug %}" class="list-group-item">{{ categorias.nombre }}</a>
+             
+{% endblock %}

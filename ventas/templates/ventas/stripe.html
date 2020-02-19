@@ -1,4 +1,5 @@
 {% extends 'ventas/basestripe.html' %}
+
 {% block content %}
 <form action ="{% url 'ventas:checkout' %}"  method="post">
  {% csrf_token %}
@@ -7,10 +8,12 @@
       <span>Amoount is %15.00% </span>
    </label>
  </article>
+
  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key ="{{ key }}"    
-    data-image= "https://tinyurl.com/y3zspzmv" 
+    data-key ="{{ key }}"
+    data-image= "https://tinyurl.com/y3zspzmv"
     data-amount ="500"
     data-locale="auto">
 </script>
+</form>
 {% endblock %}

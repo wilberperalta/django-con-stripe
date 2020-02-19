@@ -1,4 +1,4 @@
-{% extends "ventas/base.html" %}
+  {% extends "ventas/base.html" %}
 {% block title %}CodiGo eCommerce Pagina Principal{% endblock  %}
 
 {% block content %}
@@ -6,41 +6,37 @@
 {% for item in productos %}
     <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="/media/{{ item.imagen }}" alt=""></a>
+                <a href="{% url 'ventas:detail' item.slug %}"><img class="card-img-top" src="/media/{{ item.imagen }}" alt=""></a>
+                <!-- <a href=""><img class="card-img-top" src="/media/{{ item.imagen }}" alt=""></a> -->
                 <div class="card-body">
                   <h4 class="card-title">
-                    <!--<a href="{% url 'ventas:detail' item.slug %}">{{ item.nombre }}</a>-->
+                    <a href="{% url 'ventas:detail' item.slug %}">Curso de {{ item.nombre }}</a>
+                    <!-- <a href="">Curso de {{ item.nombre }}</a> -->
                   </h4>
-                  <h5>S/. {{ item.precio|floatformat:"2" }}</h5>
-                  <p class="card-text">{{ item.marca }}</p>
+                  <h5 class="price">Precio S/. {{ item.precio|floatformat:"2" }}</h5>
+                  <p class="card-text">Powered by {{ item.marca }}</p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"><a class="btn btn-success" href="">Adicionar al Carrito</a></small>
+                  <small class="text-muted"><a class="btn btn-success btn-block" href="">Adicionar al Carrito</a></small>
                 </div>
               </div>
             </div>
 {% endfor %}
 </div>
 {% endblock %}
-
-
 {% block header %}
-
-
           <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            
             </ol>
             <div class="carousel-inner" role="listbox">
-
               {% for codin in images %}
                 <div class="carousel-item {{ codin.nombreclass }} ">
                   <img class="d-block img-fluid" src="/media/{{ codin.imagen }}" alt="First slide">
                 </div>
                 {% endfor %}
-
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
