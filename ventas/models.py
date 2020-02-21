@@ -1,8 +1,8 @@
-from django.db import models
-from autoslug import AutoSlugField
-from django.contrib.auth.models import User
+from django.db import models # libreria para el uso de modelos 
+from autoslug import AutoSlugField # 
+from django.contrib.auth.models import User # importamos las variable user para verificar que esten auntenticado 
 
-class Categoria(models.Model):
+class Categoria(models.Model): # se declara el modelo categoria 
     nombre = models.CharField(max_length=250)
     slug = AutoSlugField(populate_from='nombre')
     imagen = models.ImageField(upload_to='categorias',blank=True)
@@ -16,7 +16,7 @@ class Categoria(models.Model):
     class Meta:
         verbose_name_plural='Categorias'
         
-class Productos(models.Model):
+class Productos(models.Model): # se declra el modxelo productos 
     nombre = models.CharField(max_length=250)
     slug = AutoSlugField(populate_from='nombre')
     imagen = models.ImageField(upload_to='productos',blank=True)
@@ -33,7 +33,7 @@ class Productos(models.Model):
     class Meta:
         verbose_name_plural='Productos' 
 
-class Carrusel(models.Model):
+class Carrusel(models.Model): # se Declara el modelo carrusel
     nombre = models.CharField(max_length=250)
     nombreclass = models.CharField(max_length=250, null=True)
     imagen = models.ImageField(upload_to='carrusel',blank=True)

@@ -7,8 +7,9 @@ stripe_pub = 'pk_test_UcvWnnOilQyzGZzXQsdnQv6K004zIkBU4w'
 stripe_private = 'sk_test_ntuCZzWTNykAWb5LRqv7ss8d00qi3rzWIz'
 stripe.api_key = stripe_private
 
+# Aqui se comunica la plantillas html con la logica 
 
-def home(request):
+def home(request): # funcion para hacer la peticion de la vista home 
     #Queryset api es un ORM
     productos = Productos.objects.filter(activo=True)
     categorias = Categoria.objects.filter(activo=True)
@@ -18,14 +19,14 @@ def home(request):
     context = {"productos":productos,"categorias":categorias, "images":banner, "carrito":request.session['carrito']}
     return render(request,"ventas/home.html",context)
     
-def categorias(request,slug):
+def categorias(request,slug): # Funcioon para hacer las peticiones de la vista ventas 
     cat = Categoria.objects.get(slug=slug)
     productos= Productos.objects.filter(activo=True,categoria=cat)
     categorias = Categoria.objects.filter(activo=True)
     context = {"productos":productos,"categorias":categorias, "only":cat, "carrito":request.session['carrito']}
     return render(request,"ventas/list.html",context)
 
-def search(request):
+def search(request): # Esta funcion es para hacer busquedas en las vistas ventas 
     q = request.GET["q"]
     productos = Productos.objects.filter(activo=True,nombre__icontains=q)
     categorias = Categoria.objects.filter(activo=True)
@@ -33,7 +34,7 @@ def search(request):
     return render(request,"ventas/list.html",context)
 
 
-def detail(request,slug):
+def detail(request,slug): # Muestra el detalle de las ventas 
     if Productos.objects.filter(activo=True,slug=slug).exists():
         productos=Productos.objects.get(activo=True,slug=slug)
         categorias= Categoria.objects.filter(activo=True)
@@ -70,7 +71,7 @@ def checkout(request):
     return JsonResponse(charge)
 
 # Create your views here.
-def cart_add(request,id):
+def cart_add(request,id): # Agregar al carrito 
     obj = Productos.objects.get(pk=id)
     print(obj)
     prod = {
@@ -86,7 +87,7 @@ def cart_add(request,id):
     print(request.session['carrito'])
     return redirect('/')
 
-def cart_list(request):
+def cart_list(request): # hacer la petision para ver que hay en el carrito 
     carrito = request.session.get('carrito')
     print(carrito)
     return JsonResponse(carrito,safe=False)

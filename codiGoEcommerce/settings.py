@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# aqui esta las configuraciones basicas del sistema 
 
 # Application definition
 

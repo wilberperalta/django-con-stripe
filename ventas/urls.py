@@ -1,12 +1,14 @@
-from django.urls import path
-from ventas import views
-from .views import acceso_stripe,checkout
+from django.urls import path # importamos las url generales
+from ventas import views # importamos la vistas 
+from .views import acceso_stripe,checkout # importamos del archivo views estas funciones especificas 
 
 
 app_name="ventas"
 
+#Aqui configura las rutas esto se ra importante por la navegacion 
+
 urlpatterns = [
-    path('', views.home,name='home'),
+    path('', views.home,name='home'), 
     path('categorias/<slug>', views.categorias,name='categorias'),
     path('search/', views.search,name='search'),
     path('<slug>/', views.detail,name='detail'),
